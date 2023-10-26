@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="expense.css">
+</head>
+<body>
+  <h1>Expense Tracker</h1>
+
+  <p id="total">Total: $0</p>
+
+  <label for="expense-name">Expense: </label>
+  <input id="expense-name" type="text">
+  <label for="expense-cost">Cost ($): </label>
+  <input id="expense-cost" type="number">
+  <label for="expense-date">Date: </label>
+  <input id="expense-date" type="date">
+  <button id="submit">Submit</button>
+
+  <table>
+    <tr>
+      <th>Expense</th>
+      <th>Cost</th>
+      <th>Date</th>
+    </tr>
+    <tr>
+      <td>Car Wash</td>
+      <td>20</td>
+      <td>10/02/2023</td>
+    </tr>
+    <tr>
+      <td>Discord Nitro</td>
+      <td>4.99</td>
+      <td>10/10/2023</td>
+    </tr>
+  </table> 
+
+  <script src="expense.js"></script>
+</body>
+</html>
