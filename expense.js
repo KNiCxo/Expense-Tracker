@@ -8,7 +8,7 @@ const submitBtn = document.getElementById('submit');
 const table = document.getElementById('table');
 
 // String for tracking how expenses are sorted
-let sortType = 'newest';
+let sortType = 'most-expensive';
 
 // Array to store list of expenses
 let expenseArray = [{
@@ -16,13 +16,13 @@ let expenseArray = [{
   cost:'74.31',
   date: '10/13/2023'
 }, {
-  name: 'Discord Nitro Classic',
-  cost:'4.99',
-  date: '10/12/2023'
-}, {
   name: 'Car Wash',
   cost: '20',
   date: '08/02/2023'
+}, {
+  name: 'Discord Nitro Classic',
+  cost:'4.99',
+  date: '10/12/2023'
 }];
 
 // Clear Expense Input forms and draw expense table
@@ -147,9 +147,31 @@ function insertNewest(name, cost, date) {
   });
 }
 
+function insertMostExpensive(name, cost, date) {
+  // Iterates through entire array or until return statement
+  for (let i = 0; i < expenseArray.length; i++) {
+    // If entry cost is greater than element cost, then insert in front of element
+    if (Number(cost) > Number(expenseArray[i].cost)) {
+      console.log('yes');
+      expenseArray.splice(i, 0, {
+        name,
+        cost,
+        date
+      });
+      return;
+    }
+  }
+  // If array is iterated through entirely, then push entry to end of array
+  expenseArray.push({
+    name,
+    cost,
+    date
+  });
+}
+
 // Adds expense to array and table based on sort order
 function addExpense() {
-  // If any input forms are empty or expense cost is NaN, then return
+  // If any input forms are empty or expense cost is NaN or negative, then return
   if (expenseNameInput.value == '' || expenseCostInput.value == '' || expenseDateInput.value == '' || isNaN(expenseCostInput.value)) {
     expenseNameInput.value = '';
     expenseCostInput.value = '';
@@ -169,6 +191,9 @@ function addExpense() {
       break;
     case 'newest':
       insertNewest(name, cost, date);
+      break;
+    case 'most-expensive':
+      insertMostExpensive(name, cost, date);
       break;
   }
 
