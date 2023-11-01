@@ -8,21 +8,21 @@ const submitBtn = document.getElementById('submit');
 const table = document.getElementById('table');
 
 // String for tracking how expenses are sorted
-let sortType = 'most-expensive';
+let sortType = 'least-expensive';
 
 // Array to store list of expenses
 let expenseArray = [{
+    name: 'Discord Nitro Classic',
+    cost:'4.99',
+    date: '10/12/2023'
+  }, {
+    name: 'Car Wash',
+    cost: '20',
+    date: '08/02/2023'
+  }, {
   name: 'Birthday Gift',
   cost:'74.31',
   date: '10/13/2023'
-}, {
-  name: 'Car Wash',
-  cost: '20',
-  date: '08/02/2023'
-}, {
-  name: 'Discord Nitro Classic',
-  cost:'4.99',
-  date: '10/12/2023'
 }];
 
 // Clear Expense Input forms and draw expense table
@@ -147,12 +147,34 @@ function insertNewest(name, cost, date) {
   });
 }
 
+// Inserts the expense into the array based on "Most Expensive" sort order
 function insertMostExpensive(name, cost, date) {
   // Iterates through entire array or until return statement
   for (let i = 0; i < expenseArray.length; i++) {
     // If entry cost is greater than element cost, then insert in front of element
     if (Number(cost) > Number(expenseArray[i].cost)) {
-      console.log('yes');
+      expenseArray.splice(i, 0, {
+        name,
+        cost,
+        date
+      });
+      return;
+    }
+  }
+  // If array is iterated through entirely, then push entry to end of array
+  expenseArray.push({
+    name,
+    cost,
+    date
+  });
+}
+
+// Inserts the expense into the array based on "Least Expensive" sort order
+function insertLeastExpensive(name, cost, date) {
+  // Iterates through entire array or until return statement
+  for (let i = 0; i < expenseArray.length; i++) {
+    // If entry cost is less than element cost, then insert in front of element
+    if (Number(cost) < Number(expenseArray[i].cost)) {
       expenseArray.splice(i, 0, {
         name,
         cost,
@@ -194,6 +216,9 @@ function addExpense() {
       break;
     case 'most-expensive':
       insertMostExpensive(name, cost, date);
+      break;
+    case 'least-expensive':
+      insertLeastExpensive(name, cost, date);
       break;
   }
 
