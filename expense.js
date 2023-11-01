@@ -8,21 +8,21 @@ const submitBtn = document.getElementById('submit');
 const table = document.getElementById('table');
 
 // String for tracking how expenses are sorted
-let sortType = 'sortOldest';
+let sortType = 'newest';
 
 // Array to store list of expenses
 let expenseArray = [{
-  name: 'Car Wash',
-  cost: '20',
-  date: '08/02/2023'
+  name: 'Birthday Gift',
+  cost:'74.31',
+  date: '10/13/2023'
 }, {
   name: 'Discord Nitro Classic',
   cost:'4.99',
   date: '10/12/2023'
-},{
-  name: 'Birthday Gift',
-  cost:'74.31',
-  date: '10/13/2023'
+}, {
+  name: 'Car Wash',
+  cost: '20',
+  date: '08/02/2023'
 }];
 
 // Clear Expense Input forms and draw expense table
@@ -95,6 +95,58 @@ function insertOldest(name, cost, date) {
   });
 }
 
+// Inserts the expense into the array based on the "Newest" sort order
+function insertNewest(name, cost, date) {
+  // Iterates through entire array or until return statement
+  for (let i = 0; i < expenseArray.length; i++) {
+    // If dates match, then insert in front of element
+    if (date == expenseArray[i].date) {
+      expenseArray.splice(i, 0, {
+        name,
+        cost,
+        date
+      });
+      return;
+    } else if (Number(date.slice(6)) > Number(expenseArray[i].date.slice(6))){
+      // If entry year is greater than element year, then insert in front of element
+      expenseArray.splice(i, 0, {
+        name,
+        cost,
+        date
+      });
+      return;
+    } else if (Number(date.slice(6)) == Number(expenseArray[i].date.slice(6))){
+      // If entry year and element year are the same, then check if entry month is greater than element month
+      if (Number(date.slice(0,2)) > Number(expenseArray[i].date.slice(0,2))) {
+        // If entry month is greater than element month, then insert in front of element
+        expenseArray.splice(i, 0, {
+          name,
+          cost,
+          date
+        });
+        return;
+      } else if (Number(date.slice(0,2)) == Number(expenseArray[i].date.slice(0,2))) {
+        // If entry month and element month are the same, then check if entry day is greater than element day
+        if (Number(date.slice(3,5) > Number(expenseArray[i].date.slice(3,5)))) {
+          // If entry day is greater than element day, then insert in front of element
+          expenseArray.splice(i, 0, {
+            name,
+            cost,
+            date
+          });
+          return;
+        }
+      }
+    }
+  }
+  // If array is iterated through entirely, then push entry to end of array
+  expenseArray.push({
+    name,
+    cost,
+    date
+  });
+}
+
 // Adds expense to array and table based on sort order
 function addExpense() {
   // If any input forms are empty or expense cost is NaN, then return
@@ -111,7 +163,14 @@ function addExpense() {
   const date = `${expenseDateInput.value.slice(5,7)}/${expenseDateInput.value.slice(8,10)}/${expenseDateInput.value.slice(0,4)}`;
 
   // Inserts entry into array based on sort order
-  insertOldest(name, cost, date);
+  switch (sortType) {
+    case 'oldest':
+      insertOldest(name, cost, date);
+      break;
+    case 'newest':
+      insertNewest(name, cost, date);
+      break;
+  }
 
   // Clears table and redraws with new entry
   table.innerHTML = 
