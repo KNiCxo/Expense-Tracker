@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expense Tracker</title>
-  <link rel="stylesheet" href="expense.css">
+  <link rel="stylesheet" href="expenseTracker.css">
 </head>
 <body>
   <!-- Header -->
@@ -23,6 +23,14 @@
   <input id="expense-date" type="date"> <br>
   <button id="submit">Submit</button>
 
+  <label for="sort">Sort By:</label>
+  <select name="sort" id="select-sort">
+    <option value="newest" id="newest">Newest</option>
+    <option value="oldest" id="oldest">Oldest</option>
+    <option value="most-expensive" id="most-expensive">Most Expensive</option>
+    <option value="least-expensive" id="least-expensive">Least Expensive</option>
+  </select>
+
   <!-- Expense Table -->
   <table id="table">
     <tr>
@@ -32,6 +40,6 @@
     </tr>
   </table> 
 
-  <script src="expense.js"></script>
+  <script type="module" src="expenseTracker.js"></script>
 </body>
 </html>
