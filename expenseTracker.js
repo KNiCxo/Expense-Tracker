@@ -3,6 +3,12 @@ import {
   sortNewest, sortOldest, sortLeastExpensive, sortMostExpensive
 } from "./expenseSort.js";
 
+// Element for Expense Total
+const expenseHTML = document.getElementById('expense-total');
+
+// Tracks total cost of expenses in list
+let expenseTotal = 129.74;
+
 // Elements for Expense Input and Submit Button
 const expenseNameInput = document.getElementById('expense-name');
 const expenseCostInput = document.getElementById('expense-cost');
@@ -18,7 +24,8 @@ const table = document.getElementById('table');
 // String for tracking how expenses are sorted
 let sortType = 'newest';
 
-// Clear Expense Input forms and draw expense table
+// Set Expense Total, clear Expense Input forms and draw expense table
+expenseHTML.innerHTML = `$${expenseTotal}`;
 expenseNameInput.value = '';
 expenseCostInput.value = '';
 expenseDateInput.value = '';
@@ -50,6 +57,11 @@ sortMenu.addEventListener('click', () => {
   drawTable();
 });
 
+function calculateTotal(cost) {
+  expenseTotal += Number(cost);
+  expenseHTML.innerHTML = `$${expenseTotal}`;
+}
+
  // Clears table
 function clearTable() {
   table.innerHTML = 
@@ -68,7 +80,9 @@ function drawTable() {
     tableEntry.innerHTML = `
     <td>${entry.name}</td>
     <td>${entry.cost}</td>
-    <td>${entry.date}</td>`;
+    <td>${entry.date}</td>
+    <button class="edit">Edit</button>
+    <button class="delete">Delete</button>`;
 
     table.append(tableEntry);
   });
@@ -106,7 +120,8 @@ function addExpense() {
       break;
   }
 
-  // Clears table and redraws with new entry
+  //Calculates Clears table and redraws with new entry
+  calculateTotal(cost);
   clearTable();
   drawTable();
 
