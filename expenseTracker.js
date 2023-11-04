@@ -77,7 +77,8 @@ function drawTable() {
 // Adds expense to array and table based on sort order
 function addExpense() {
   // If any input forms are empty or expense cost is NaN or negative, then return
-  if (expenseNameInput.value == '' || expenseCostInput.value == '' || expenseDateInput.value == '' || isNaN(expenseCostInput.value)) {
+  if (expenseNameInput.value == '' || expenseCostInput.value == '' || expenseDateInput.value == '' || isNaN(expenseCostInput.value) ||
+      expenseCostInput.value < 0) {
     expenseNameInput.value = '';
     expenseCostInput.value = '';
     expenseDateInput.value = '';
