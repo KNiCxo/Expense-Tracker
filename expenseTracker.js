@@ -1,7 +1,7 @@
 import {
   expenseArray, insertNewest, insertOldest, insertLeastExpensive, insertMostExpensive, 
   sortNewest, sortOldest, sortLeastExpensive, sortMostExpensive
-} from "./expense.js";
+} from "./expenseSort.js";
 
 // Elements for Expense Input and Submit Button
 const expenseNameInput = document.getElementById('expense-name');

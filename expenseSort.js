@@ -1,9 +1,5 @@
 // Array to store list of expenses
 export let expenseArray = [{
-  name: 'Drugs',
-  cost: '30.44',
-  date: '04/02/2023'
-}, {
   name: 'Birthday Gift',
   cost:'74.31',
   date: '10/13/2023'
@@ -15,6 +11,10 @@ export let expenseArray = [{
 name: 'Car Wash',
 cost: '20',
 date: '08/02/2023'
+}, {
+  name: 'Drugs',
+  cost: '30.44',
+  date: '04/02/2023'
 }];
 
 // Inserts the expense into the array based on the "Newest" sort order
@@ -211,13 +211,31 @@ export function sortNewest() {
 }
 
 export function sortOldest() {
+  let tempArray = [];
+  
+  for (let i = 0; i < expenseArray.length; i++) {
+    insertOldest(expenseArray[i].name, expenseArray[i].cost, expenseArray[i].date, tempArray);
+  }
 
+  expenseArray = tempArray;
 }
 
 export function sortMostExpensive() {
+  let tempArray = [];
+  
+  for (let i = 0; i < expenseArray.length; i++) {
+    insertMostExpensive(expenseArray[i].name, expenseArray[i].cost, expenseArray[i].date, tempArray);
+  }
 
+  expenseArray = tempArray;
 }
 
 export function sortLeastExpensive() {
+  let tempArray = [];
+  
+  for (let i = 0; i < expenseArray.length; i++) {
+    insertLeastExpensive(expenseArray[i].name, expenseArray[i].cost, expenseArray[i].date, tempArray);
+  }
 
+  expenseArray = tempArray;
 }
