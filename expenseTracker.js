@@ -24,6 +24,9 @@ const table = document.getElementById('table');
 // String for tracking how expenses are sorted
 let sortType = 'newest';
 
+// Keeps track of if the user is editing an entry
+let isEditing = false;
+
 // Set Expense Total, clear Expense Input forms and draw expense table
 expenseHTML.innerHTML = `$${expenseTotal}`;
 expenseNameInput.value = '';
@@ -56,37 +59,6 @@ sortMenu.addEventListener('click', () => {
   clearTable();
   drawTable();
 });
-
-function calculateTotal(cost) {
-  expenseTotal += Number(cost);
-  expenseHTML.innerHTML = `$${expenseTotal}`;
-}
-
- // Clears table
-function clearTable() {
-  table.innerHTML = 
-  `<tr>
-    <th>Expense</th>
-    <th>Cost</th>
-    <th>Date</th>
-  </tr>`;
-}
-
-// Displays all expenses stored in the array as a table
-function drawTable() {
-  expenseArray.forEach((entry) => {
-    const tableEntry = document.createElement('tr');
-
-    tableEntry.innerHTML = `
-    <td>${entry.name}</td>
-    <td>${entry.cost}</td>
-    <td>${entry.date}</td>
-    <button class="edit">Edit</button>
-    <button class="delete">Delete</button>`;
-
-    table.append(tableEntry);
-  });
-}
 
 // Adds expense to array and table based on sort order
 function addExpense() {
@@ -132,4 +104,80 @@ function addExpense() {
   expenseNameInput.value = '';
   expenseCostInput.value = '';
   expenseDateInput.value = '';
+}
+
+function calculateTotal(cost) {
+  expenseTotal += Number(cost);
+  expenseHTML.innerHTML = `$${expenseTotal}`;
+}
+
+ // Clears table
+function clearTable() {
+  table.innerHTML = 
+  `<tr>
+    <th>Expense</th>
+    <th>Cost</th>
+    <th>Date</th>
+  </tr>`;
+}
+
+// Displays all expenses stored in the array as a table
+function drawTable() {
+  // For each expense, create a "tr" element with a unique class name
+  for (let i = 0; i < expenseArray.length; i++) {
+    const tableEntry = document.createElement('tr');
+    tableEntry.className = `entry${i}`;
+
+    // Add expense info to HTML
+    tableEntry.innerHTML = `
+    <td>${expenseArray[i].name}</td>
+    <td>${expenseArray[i].cost}</td>
+    <td>${expenseArray[i].date}</td>
+    <button class="editBtn edit${i}">Edit</button>
+    <button class="deleteBtn delete${i}">Delete</button>`;
+
+    // Append entry to table, hide buttons, and create event listeners
+    table.append(tableEntry);
+    document.querySelector(`.edit${i}`).style.visibility = 'hidden';
+    document.querySelector(`.delete${i}`).style.visibility = 'hidden';
+    createEventListenters(i);
+  }
+}
+
+// Shows or hides "Edit" and "Delete" buttons depending on event type
+function hover(event, isEditing, entryIndex) {
+  if (!isEditing) {
+    document.querySelector(`.edit${entryIndex}`).style.visibility = (event.type === 'mouseover') ? 'visible' : 'hidden';
+    document.querySelector(`.delete${entryIndex}`).style.visibility = (event.type === 'mouseover') ? 'visible' : 'hidden';
+  }
+}
+
+// Creates event listeners for expense "tr" element and for "Edit" and "Delete" buttons
+function createEventListenters(entryIndex) {
+  // Displays "Edit" and "Delete" buttons if element is hovered over
+  document.querySelector(`.entry${entryIndex}`).addEventListener('mouseover', (event) => {
+    hover(event, isEditing, entryIndex);
+  });
+
+  // Hides "Edit" and "Delete" buttons if element is not hovered over
+  document.querySelector(`.entry${entryIndex}`).addEventListener('mouseout', (event) => {
+    hover(event, isEditing, entryIndex);
+  });
+  /* *** WORK IN PROGRESS ***
+  // Edits/Saves expense when clicked
+  document.querySelector(`.edit${entryName}`).addEventListener('click', () => {
+    editTask(entryName);
+  });
+
+  // Saves expense when "Enter" is pressed
+  document.querySelector(`.task${entryName}`).addEventListener('keypress', (event) => {
+    if (event.key == 'Enter') {
+      editTask(entryName);
+    }
+  });
+
+  // Deletes expense element when clicked
+  document.querySelector(`.delete${entryName}`).addEventListener('click', () => {
+    deleteTask(entryName);
+  });*/
 }
