@@ -1,19 +1,19 @@
 // Array to store list of expenses
 export let expenseArray = [{
   name: 'Birthday Gift',
-  cost:'74.31',
+  cost: 74.31,
   date: '10/13/2023'
 }, {
   name: 'Discord Nitro Classic',
-  cost:'4.99',
+  cost: 4.99,
   date: '10/12/2023'
 }, {
 name: 'Car Wash',
-cost: '20',
+cost: 20,
 date: '08/02/2023'
 }, {
   name: 'Drugs',
-  cost: '30.44',
+  cost: 30.44,
   date: '04/02/2023'
 }];
 

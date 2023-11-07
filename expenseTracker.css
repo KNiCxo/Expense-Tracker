@@ -1,3 +1,7 @@
 .editBtn, .deleteBtn {
-  font-size: 10px;
+  font-size: 12px;
+}
+
+.name-edit, .cost-edit, .date-edit {
+  font-size: 12px;
 }
