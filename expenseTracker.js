@@ -28,39 +28,21 @@ export const sortMenu = document.getElementById('select-sort');
 const table = document.getElementById('table');
 
 // String for tracking how expenses are sorted
-export let sortType = 'newest';
+export let sortType;
 
 // Set Expense Total, clear Expense Input forms and draw expense table
 expenseHTML.innerHTML = `$${expenseTotal}`;
 expenseNameInput.value = '';
 expenseCostInput.value = '';
 expenseDateInput.value = '';
-drawTable();
+sortTable();
 
 // Expense is added to table and total is calculated when Submit Button is clicked
 submitBtn.addEventListener('click', addExpense);
 
 // Sorts array based on sort order when clicked
 sortMenu.addEventListener('click', () => {
-  sortType = sortMenu.value;
-
-  switch (sortType) {
-    case 'newest':
-      sortNewest();
-      break;
-    case 'oldest':
-      sortOldest();
-      break;
-    case 'most-expensive':
-      sortMostExpensive();
-      break;
-    case 'least-expensive':
-      sortLeastExpensive();
-      break;
-  }
-  
-  clearTable();
-  drawTable();
+  sortTable();
 });
 
 // Adds expense to array and table based on sort order
@@ -95,7 +77,7 @@ function addExpense() {
       break;
   }
 
-  //Calculates, clears table and redraws with new entry
+  //Calculates, clears table and re-draws with new entry
   calculateTotal(cost);
   clearTable();
   drawTable();
@@ -177,4 +159,27 @@ export function drawTable() {
     document.querySelector(`.delete${i}`).style.visibility = 'hidden';
     createEventListenters(i);
   }
+}
+
+// Sorts and re-draws table based on sort type
+function sortTable() {
+  sortType = sortMenu.value;
+
+  switch (sortType) {
+    case 'newest':
+      sortNewest();
+      break;
+    case 'oldest':
+      sortOldest();
+      break;
+    case 'most-expensive':
+      sortMostExpensive();
+      break;
+    case 'least-expensive':
+      sortLeastExpensive();
+      break;
+  }
+  
+  clearTable();
+  drawTable();
 }
