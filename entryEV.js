@@ -3,7 +3,7 @@ import {
   expenseArray, insertNewest, insertOldest, insertLeastExpensive, insertMostExpensive, 
 } from "./sort.js";
 
-// Import sorting functions from sort.js
+// Import variables and functions from expenseTracker.js
 import {
   submitBtn, sortMenu, sortType, calculateTotal, clearTable, drawTable
 } from "./expenseTracker.js";
@@ -19,7 +19,7 @@ export function hover(event, entryIndex) {
   }
 }
 
-// Function to edit or save an expense
+// Edits or saves an expense entry
 export function editExpense(entryIndex) {
   // Gets correct "Edit" button and entry name, cost, and date elements
   const editBtn = document.querySelector(`.edit${entryIndex}`);
@@ -101,4 +101,20 @@ export function editExpense(entryIndex) {
       }
     }
   }
+}
+
+
+// Deletes an expense entry and re-calculates total
+export function deleteExpense(entryIndex) {
+  // Find entry in array, re-calculate total, then remove from array
+  const entryName = document.querySelector(`.expense-name-${entryIndex}`).innerHTML;
+  for (let i = 0; i < expenseArray.length; i++) {
+    if (entryName == expenseArray[i].name) {
+      calculateTotal(-expenseArray[i].cost)
+      expenseArray.splice(i, 1);
+    }
+  }
+
+  // Remove entry from table
+  document.querySelector(`.entry${entryIndex}`).remove();
 }

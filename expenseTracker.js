@@ -4,9 +4,9 @@ import {
   sortNewest, sortOldest, sortLeastExpensive, sortMostExpensive
 } from "./sort.js";
 
-// Import sorting functions from sort.js
+// Import entry event listener functions from entryEV.js
 import {
-  hover, editExpense
+  hover, editExpense, deleteExpense
 } from "./entryEV.js";
 
 // Element for Expense Total
@@ -150,11 +150,10 @@ function createEventListenters(entryIndex) {
     }
   });
 
-  /* *** WORK IN PROGRESS ***
   // Deletes expense element when clicked
-  document.querySelector(`.delete${entryName}`).addEventListener('click', () => {
-    deleteTask(entryName);
-  });*/
+  document.querySelector(`.delete${entryIndex}`).addEventListener('click', () => {
+    deleteExpense(entryIndex);
+  });
 }
 
 // Displays all expenses stored in the array as a table
