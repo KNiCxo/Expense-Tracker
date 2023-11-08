@@ -142,14 +142,15 @@ function createEventListenters(entryIndex) {
   document.querySelector(`.edit${entryIndex}`).addEventListener('click', () => {
     editExpense(entryIndex);
   });
-  /* *** WORK IN PROGRESS ***
+
   // Saves expense when "Enter" is pressed
-  document.querySelector(`.task${entryName}`).addEventListener('keypress', (event) => {
+  document.querySelector(`.entry${entryIndex}`).addEventListener('keypress', (event) => {
     if (event.key == 'Enter') {
-      editTask(entryName);
+      editExpense(entryIndex);
     }
   });
 
+  /* *** WORK IN PROGRESS ***
   // Deletes expense element when clicked
   document.querySelector(`.delete${entryName}`).addEventListener('click', () => {
     deleteTask(entryName);
