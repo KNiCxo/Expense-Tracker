@@ -106,17 +106,14 @@ export function editExpense(entryIndex) {
 
 // Deletes an expense entry and re-calculates total
 export function deleteExpense(entryIndex) {
-  // Find entry in array, re-calculate total, then remove from array and return
+  // Find entry in array, re-calculate total, remove from array and table, then return
   const entryName = document.querySelector(`.expense-name-${entryIndex}`).innerHTML;
   for (let i = 0; i < expenseArray.length; i++) {
     if (entryName == expenseArray[i].name) {
       calculateTotal(-expenseArray[i].cost)
       expenseArray.splice(i, 1);
       localStorage.setItem('expenseArray', JSON.stringify(expenseArray));
-      return;
+      document.querySelector(`.entry${entryIndex}`).remove();
     }
   }
-
-  // Remove entry from table
-  document.querySelector(`.entry${entryIndex}`).remove();
 }

@@ -13,7 +13,10 @@ import {
 const expenseHTML = document.getElementById('expense-total');
 
 // Tracks total cost of expenses in list
-export let expenseTotal = 0;
+export let expenseTotal = JSON.parse(localStorage.getItem('expenseTotal'));
+if (!expenseTotal) {
+  expenseTotal = 0;
+}
 
 // Elements for Expense Input and Submit Button
 const expenseNameInput = document.getElementById('expense-name');
@@ -43,9 +46,7 @@ expenseArray.forEach((index) => console.log(index));
 submitBtn.addEventListener('click', addExpense);
 
 // Sorts array based on sort order when clicked
-sortMenu.addEventListener('click', () => {
-  sortTable();
-});
+sortMenu.addEventListener('click', () => sortTable());
 
 // Adds expense to array and table based on sort order
 function addExpense() {
@@ -99,6 +100,7 @@ export function calculateTotal(cost) {
   expenseTotal += Number(cost);
   expenseTotal = Math.round(expenseTotal * 100) / 100;
   expenseHTML.innerHTML = `$${expenseTotal}`;
+  localStorage.setItem('expenseTotal', JSON.stringify(expenseTotal));
 }
 
  // Clears table
