@@ -66,7 +66,7 @@ export function editExpense(entryIndex) {
       expenseDate.innerHTML = `${editedDate.value.slice(5,7)}/${editedDate.value.slice(8,10)}/${editedDate.value.slice(0,4)}`;
 
       // If entry values are all the same, then return
-      // Else calculate cost difference in changes and add to total, re-sort entry in the array, and redraw table
+      // Else calculate cost difference and add to total, re-sort entry in the array, and redraw table
       if (expenseName.innerHTML == expenseArray[entryIndex].name &&
         expenseCost.innerHTML == expenseArray[entryIndex].cost &&
         expenseDate.innerHTML == expenseArray[entryIndex].date) {
@@ -94,6 +94,7 @@ export function editExpense(entryIndex) {
             insertLeastExpensive(expenseName.innerHTML, expenseCost.innerHTML, expenseDate.innerHTML, expenseArray);
             break;
         }
+        localStorage.setItem('expenseArray', JSON.stringify(expenseArray));
 
         // Clear and redraw table
         clearTable();
@@ -103,15 +104,16 @@ export function editExpense(entryIndex) {
   }
 }
 
-
 // Deletes an expense entry and re-calculates total
 export function deleteExpense(entryIndex) {
-  // Find entry in array, re-calculate total, then remove from array
+  // Find entry in array, re-calculate total, then remove from array and return
   const entryName = document.querySelector(`.expense-name-${entryIndex}`).innerHTML;
   for (let i = 0; i < expenseArray.length; i++) {
     if (entryName == expenseArray[i].name) {
       calculateTotal(-expenseArray[i].cost)
       expenseArray.splice(i, 1);
+      localStorage.setItem('expenseArray', JSON.stringify(expenseArray));
+      return;
     }
   }
 

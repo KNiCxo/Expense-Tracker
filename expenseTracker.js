@@ -13,7 +13,7 @@ import {
 const expenseHTML = document.getElementById('expense-total');
 
 // Tracks total cost of expenses in list
-export let expenseTotal = 129.74;
+export let expenseTotal = 0;
 
 // Elements for Expense Input and Submit Button
 const expenseNameInput = document.getElementById('expense-name');
@@ -36,6 +36,8 @@ expenseNameInput.value = '';
 expenseCostInput.value = '';
 expenseDateInput.value = '';
 sortTable();
+// *** TEMPORARY CODE: DELETE LATER *** \\
+expenseArray.forEach((index) => console.log(index));
 
 // Expense is added to table and total is calculated when Submit Button is clicked
 submitBtn.addEventListener('click', addExpense);
@@ -76,6 +78,7 @@ function addExpense() {
       insertLeastExpensive(name, cost, date, expenseArray);
       break;
   }
+  localStorage.setItem('expenseArray', JSON.stringify(expenseArray));
 
   //Calculates, clears table and re-draws with new entry
   calculateTotal(cost);

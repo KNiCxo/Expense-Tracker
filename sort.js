@@ -1,31 +1,44 @@
 // Array to store list of expenses
-export let expenseArray = [{
-  name: 'Birthday Gift',
-  cost: 74.31,
-  date: '10/13/2023'
-}, {
-  name: 'Discord Nitro Classic',
-  cost: 4.99,
-  date: '10/12/2023'
-}, {
-name: 'Car Wash',
-cost: 20,
-date: '08/02/2023'
-}, {
-  name: 'Drugs',
-  cost: 30.44,
-  date: '04/02/2023'
-}];
+export let expenseArray = JSON.parse(localStorage.getItem('expenseArray'));
+if (!expenseArray) {
+  expenseArray = [];
+}
 
-// Inserts the expense into the array based on the "Newest" sort order
-export function insertNewest(name, cost, date, array) {
-  // If array is empty, then push entry into array
-  if (array.length == 0) {
+// If array is empty, then push entry into array
+function checkEmpty(name, cost, date, array) {
+   if (array.length == 0) {
     array.push({
       name,
       cost,
       date
     });
+    return true;
+  }
+}
+
+// Inserts element into array
+function insert(push, index, name, cost, date, array) {
+  // If push == true, then push into array
+  // Else, splice into array and insert
+  if (push) {
+    array.push({
+      name,
+      cost,
+      date
+    });
+  } else {
+    array.splice(index, 0, {
+      name,
+      cost,
+      date
+    });
+  }
+}
+
+// Inserts the expense into the array based on the "Newest" sort order
+export function insertNewest(name, cost, date, array) {
+  // If array is empty, push element into array and return
+  if (checkEmpty(name, cost, date, array)) {
     return;
   }
 
@@ -33,61 +46,36 @@ export function insertNewest(name, cost, date, array) {
   for (let i = 0; i < array.length; i++) {
     // If dates match, then insert in front of element
     if (date == array[i].date) {
-      array.splice(i, 0, {
-        name,
-        cost,
-        date
-      });
+      insert(false, i, name, cost, date, array);
       return;
     } else if (Number(date.slice(6)) > Number(array[i].date.slice(6))){
       // If entry year is greater than element year, then insert in front of element
-      array.splice(i, 0, {
-        name,
-        cost,
-        date
-      });
+      insert(false, i, name, cost, date, array);
       return;
     } else if (Number(date.slice(6)) == Number(array[i].date.slice(6))){
       // If entry year and element year are the same, then check if entry month is greater than element month
       if (Number(date.slice(0,2)) > Number(array[i].date.slice(0,2))) {
         // If entry month is greater than element month, then insert in front of element
-        array.splice(i, 0, {
-          name,
-          cost,
-          date
-        });
+        insert(false, i, name, cost, date, array);
         return;
       } else if (Number(date.slice(0,2)) == Number(array[i].date.slice(0,2))) {
         // If entry month and element month are the same, then check if entry day is greater than element day
         if (Number(date.slice(3,5) > Number(array[i].date.slice(3,5)))) {
           // If entry day is greater than element day, then insert in front of element
-          array.splice(i, 0, {
-            name,
-            cost,
-            date
-          });
+          insert(false, i, name, cost, date, array);
           return;
         }
       }
     }
   }
   // If array is iterated through entirely, then push entry to end of array
-  array.push({
-    name,
-    cost,
-    date
-  });
+  insert(true, 0, name, cost, date, array);
 }
 
 // Inserts the expense into the array based on the "Oldest" sort order
 export function insertOldest(name, cost, date, array) {
-  // If array is empty, then push entry into array
-  if (array.length == 0) {
-    array.push({
-      name,
-      cost,
-      date
-    });
+  // If array is empty, push element into array and return
+  if (checkEmpty(name, cost, date, array)) {
     return;
   }
 
@@ -98,53 +86,32 @@ export function insertOldest(name, cost, date, array) {
       //pass
     } else if (Number(date.slice(6)) < Number(array[i].date.slice(6))){
       // If entry year is less than element year, then insert in front of element
-      array.splice(i, 0, {
-        name,
-        cost,
-        date
-      });
+      insert(false, i, name, cost, date, array);
       return;
     } else if (Number(date.slice(6)) == Number(array[i].date.slice(6))) {
       // If entry year and element year are the same, then check if entry month is less than element month
       if (Number(date.slice(0,2)) < Number(array[i].date.slice(0,2))) {
         // If entry month is less than element month, then insert in front of element
-        array.splice(i, 0, {
-          name,
-          cost,
-          date
-        });
+        insert(false, i, name, cost, date, array);
         return;
       } else if (Number(date.slice(0,2)) == Number(array[i].date.slice(0,2))) {
         // If entry month and element month are the same, then check if entry day is less than element day
         if (Number(date.slice(3,5) < Number(array[i].date.slice(3,5)))) {
           // If entry day is less than element day, then insert in front of element
-          array.splice(i, 0, {
-            name,
-            cost,
-            date
-          });
+          insert(false, i, name, cost, date, array);
           return;
         }
       }
     }
   }
   // If array is iterated through entirely, then push entry to end of array
-  array.push({
-    name,
-    cost,
-    date
-  });
+  insert(true, 0, name, cost, date, array);
 }
 
 // Inserts the expense into the array based on "Most Expensive" sort order
 export function insertMostExpensive(name, cost, date, array) {
-  // If array is empty, then push entry into array
-  if (array.length == 0) {
-    array.push({
-      name,
-      cost,
-      date
-    });
+  // If array is empty, push element into array and return
+  if (checkEmpty(name, cost, date, array)) {
     return;
   }
 
@@ -152,31 +119,18 @@ export function insertMostExpensive(name, cost, date, array) {
   for (let i = 0; i < array.length; i++) {
     // If entry cost is greater than element cost, then insert in front of element
     if (Number(cost) > Number(array[i].cost)) {
-      array.splice(i, 0, {
-        name,
-        cost,
-        date
-      });
+      insert(false, i, name, cost, date, array);
       return;
     }
   }
   // If array is iterated through entirely, then push entry to end of array
-  array.push({
-    name,
-    cost,
-    date
-  });
+  insert(true, 0, name, cost, date, array);
 }
 
 // Inserts the expense into the array based on "Least Expensive" sort order
 export function insertLeastExpensive(name, cost, date, array) {
-  // If array is empty, then push entry into array
-  if (array.length == 0) {
-    array.push({
-      name,
-      cost,
-      date
-    });
+  // If array is empty, push element into array and return
+  if (checkEmpty(name, cost, date, array)) {
     return;
   }
 
@@ -184,23 +138,17 @@ export function insertLeastExpensive(name, cost, date, array) {
   for (let i = 0; i < array.length; i++) {
     // If entry cost is less than element cost, then insert in front of element
     if (Number(cost) < Number(array[i].cost)) {
-      array.splice(i, 0, {
-        name,
-        cost,
-        date
-      });
+      insert(false, i, name, cost, date, array);
       return;
     }
   }
   // If array is iterated through entirely, then push entry to end of array
-  array.push({
-    name,
-    cost,
-    date
-  });
+  insert(true, 0, name, cost, date, array);
 }
 
+// Sorts array by newest dates first
 export function sortNewest() {
+  // Creates a temp array to store sorted values
   let tempArray = [];
   
   for (let i = 0; i < expenseArray.length; i++) {
@@ -210,7 +158,9 @@ export function sortNewest() {
   expenseArray = tempArray;
 }
 
+// Sorts array by oldest dates first
 export function sortOldest() {
+  // Creates a temp array to store sorted values
   let tempArray = [];
   
   for (let i = 0; i < expenseArray.length; i++) {
@@ -220,7 +170,9 @@ export function sortOldest() {
   expenseArray = tempArray;
 }
 
+// Sorts array by most expensive costs first
 export function sortMostExpensive() {
+  // Creates a temp array to store sorted values
   let tempArray = [];
   
   for (let i = 0; i < expenseArray.length; i++) {
@@ -230,7 +182,9 @@ export function sortMostExpensive() {
   expenseArray = tempArray;
 }
 
+// Sorts array by least expenseive costs first
 export function sortLeastExpensive() {
+  // Creates a temp array to store sorted values
   let tempArray = [];
   
   for (let i = 0; i < expenseArray.length; i++) {
