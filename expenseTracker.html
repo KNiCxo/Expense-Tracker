@@ -12,28 +12,35 @@
   <h1>Expense Tracker</h1>
 
   <!-- Expense Total -->
-  <label for="expense-total">Total:</label>
-  <span id="expense-total">0</span> <br>
+  <div class="total">
+    <label for="expense-total">Total:</label>
+    <span id="expense-total">0</span> <br>
+  </div>
 
   <!-- Expense Input Forms -->
-  <label for="expense-name">Expense: </label>
-  <input id="expense-name" type="text"> <br>
-  <label for="expense-cost">Cost ($): </label>
-  <input id="expense-cost" type="number"> <br>
-  <label for="expense-date">Date: </label>
-  <input id="expense-date" type="date"> <br>
-  <button id="submit">Submit</button>
+  <div class="input-forms">
+    <label for="expense-name">Expense: </label>
+    <input id="expense-name" class="expense-input" type="text"> <br>
+    <label for="expense-cost" >Cost ($): </label>
+    <input id="expense-cost" class="expense-input" type="number"> <br>
+    <label for="expense-date">Date: </label>
+    <input id="expense-date" class="expense-input" type="date"> <br>
+  </div>
 
-  <label for="sort">Sort By:</label>
-  <select name="sort" id="select-sort">
-    <option value="newest" id="newest">Newest</option>
-    <option value="oldest" id="oldest">Oldest</option>
-    <option value="most-expensive" id="most-expensive">Most Expensive</option>
-    <option value="least-expensive" id="least-expensive">Least Expensive</option>
-  </select>
+  <button id="submit">Submit</button> <br>
+
+  <div class="sort">
+    <label for="sort">Sort By:</label>
+    <select name="sort" id="select-sort">
+      <option value="newest" id="newest">Newest</option>
+      <option value="oldest" id="oldest">Oldest</option>
+      <option value="most-expensive" id="most-expensive">Most Expensive</option>
+      <option value="least-expensive" id="least-expensive">Least Expensive</option>
+    </select>
+  </div>
 
   <!-- Expense Table -->
-  <table id="table">
+  <table id="entryTable">
     <tr>
       <th>Expense</th>
       <th>Cost</th>

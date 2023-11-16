@@ -27,42 +27,43 @@ export function editExpense(entryIndex) {
   const expenseCost = document.querySelector(`.expense-cost-${entryIndex}`);
   const expenseDate = document.querySelector(`.expense-date-${entryIndex}`);
 
-  // If button says "Edit", disable submit button and sort select, change to "Save", and enable entry editing
-  // Else, enable submit button and sort select, change to "Edit", disable entry editing, and save changes
+  // If button says "Edit", disable submit button and sort menu, change to "Save", and enable entry editing
+  // Else, enable submit button and sort menu, change to "Edit", disable entry editing, and save changes
   if (editBtn.innerHTML == 'Edit') {
     isEditing = true;
     submitBtn.disabled = true;
     sortMenu.disabled = true;
     editBtn.innerHTML = 'Save';
 
-    // Used to store date to reformat it as YYYY-MM-DD
+    // Stores date and reformats as YYYY-MM-DD input field
     const dateValue = expenseDate.innerHTML;
+    expenseDate.innerHTML = `<input class="date-edit edited" type="date" value="${dateValue.slice(6,10)}-${dateValue.slice(0,2)}-${dateValue.slice(3,5)}">`;
 
     // Makes name, cost, and date elements editable
-    expenseName.innerHTML = `<input class="name-edit" type="text" style="width: 100px;" value="${expenseName.innerHTML}">`;
-    expenseCost.innerHTML = `<input class="cost-edit" type="number" style="width: 60px;" value="${expenseCost.innerHTML}">`;
-    expenseDate.innerHTML = `<input class="date-edit" type="date" value="${dateValue.slice(6,10)}-${dateValue.slice(0,2)}-${dateValue.slice(3,5)}">`;
+    expenseName.contentEditable = true;
+    expenseCost.contentEditable = true;
+
   } else {
     isEditing = false;
     submitBtn.disabled = false;
     sortMenu.disabled = false;
     editBtn.innerHTML = 'Edit';
 
-    // Gets edited entry input elements
-    const editedName = document.querySelector(`.name-edit`);
-    const editedCost = document.querySelector(`.cost-edit`);
+    // Gets edited date input element
     const editedDate = document.querySelector(`.date-edit`);
 
     // If any input forms are empty or expense cost is NaN or less than or equal to 0, then set to original values
-    // Else, save changes and re-sort entry is needed
-    if (editedName.value == '' || editedCost.value == '' || editedDate.value == '' || isNaN(editedCost.value) || 
-        editedCost.value <= 0) {
+    // Else, save changes and re-sort entry if needed
+    if (expenseName.innerHTML == '<br>' || expenseCost.innerHTML == '' || editedDate.value == '' || isNaN(expenseCost.innerHTML) || 
+        expenseCost.innerHTML <= 0) {
       expenseName.innerHTML = `${expenseArray[entryIndex].name}`;
       expenseCost.innerHTML = `${expenseArray[entryIndex].cost}`;
       expenseDate.innerHTML = `${expenseArray[entryIndex].date}`;
     } else {
-      expenseName.innerHTML = `${editedName.value}`;
-      expenseCost.innerHTML = `${editedCost.value}`;
+
+      // Converts date back to MM-DD-YYYY and makes elements not editable
+      expenseName.contentEditable = false;
+      expenseCost.contentEditable = false;
       expenseDate.innerHTML = `${editedDate.value.slice(5,7)}/${editedDate.value.slice(8,10)}/${editedDate.value.slice(0,4)}`;
 
       // If entry values are all the same, then return
@@ -116,4 +117,9 @@ export function deleteExpense(entryIndex) {
       document.querySelector(`.entry${entryIndex}`).remove();
     }
   }
+
+  // Prevents buttons from staying hidden and being locked if entry is deleted while being edited
+  isEditing = false;
+  submitBtn.disabled = false;
+  sortMenu.disabled = false;
 }

@@ -1,7 +1,142 @@
-.editBtn, .deleteBtn {
-  font-size: 12px;
+/* Roboto Medium font */
+@font-face {
+  src: url(fonts/Roboto/Roboto-medium.ttf);
+  font-family: roboto-medium;
 }
 
-.name-edit, .cost-edit, .date-edit {
-  font-size: 12px;
+/* Oswald Regular font */
+@font-face {
+  src: url(fonts/Oswald/static/Oswald-Regular.ttf);
+  font-family: oswald-regular;
+}
+
+body {
+  background-color: rgb(41, 39, 39);
+  color: white;
+  text-align: center;
+  font-family: oswald-regular;
+}
+
+h1 {
+  font-size: 50px;
+  text-shadow: 3px 3px black;
+  margin: 40px 0 0;
+}
+
+.total {
+  font-size: 40px;
+  text-shadow: 3px 3px black;
+  margin: 20px 0 20px;
+}
+
+#expense-total {
+  color: rgb(26, 199, 26);
+}
+
+.input-forms {
+  font-size: 25px;
+  text-shadow: 3px 3px black;
+}
+
+.expense-input {
+  background-color: rgb(224, 222, 222);
+  width: 180px;
+  height: 15px;
+  position: relative;
+  top: -3px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 18px;
+  font-family: roboto-medium;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+}
+
+input[type=number]{
+  -moz-appearance: textfield;
+}
+
+#submit {
+  background-color: rgb(63, 109, 201);
+  color: white;
+  width: 190px;
+  height: 40px;
+  margin: 5px 0;
+  line-height: 0px;
+  font-size: 25px;
+  font-family: oswald-regular;
+  border: none;
+  border-radius: 15px;
+}
+
+#submit:hover {
+  background-color: rgb(49, 91, 176);
+}
+
+.sort {
+  margin-top: 5px;
+  font-size: 25px;
+}
+
+.sort select {
+  width: 180px;
+  height: 35px;
+  position: relative;
+  top: 2px;
+  line-height: 0px;
+  font-size: 20px;
+  font-family: oswald-regular;
+}
+
+table {
+  margin-top: 20px;
+  width: 100%;
+  font-size: 20px;
+}
+
+tr {
+  font-size: 23px;
+}
+
+tr:nth-child(even) {
+  background-color: #473f3f;
+}
+
+th {
+  font-size: 26px;
+  text-shadow: 3px 3px black;
+}
+
+td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+td, th, tr, table {
+  border: 0; 
+  border-spacing: 0;
+}
+
+.entryBtn {
+  background-color:rgb(59, 55, 55);
+  color: white;
+  width: 42px;
+  height: 30px;
+  font-size: 14px;
+  font-family: oswald-regular;
+  border: none;
+  border-radius: 7px;
+}
+
+.entryBtn:hover {
+  background-color: white;
+  color: rgb(59, 55, 55);
+}
+
+
+.edited{
+  width: 95px;
+  height: 30px;
+  font-size: 10px;
 }

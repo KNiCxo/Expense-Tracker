@@ -28,7 +28,7 @@ export const submitBtn = document.getElementById('submit');
 export const sortMenu = document.getElementById('select-sort');
 
 // Element for Expense Table
-const table = document.getElementById('table');
+const table = document.getElementById('entryTable');
 
 // String for tracking how expenses are sorted
 export let sortType;
@@ -155,8 +155,12 @@ export function drawTable() {
     <td class="expense-name-${i}">${expenseArray[i].name}</td>
     <td class="expense-cost-${i}">${expenseArray[i].cost}</td>
     <td class="expense-date-${i}">${expenseArray[i].date}</td>
-    <button class="editBtn edit${i}">Edit</button>
-    <button class="deleteBtn delete${i}">Delete</button>`;
+    <td>
+      <div class="buttons">
+        <button class="entryBtn edit${i}">Edit</button>
+        <button class="entryBtn delete${i}">Delete</button>
+      </div>
+    </td>`;
 
     // Append entry to table, hide buttons, and create event listeners
     table.append(tableEntry);
