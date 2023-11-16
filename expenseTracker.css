@@ -10,6 +10,7 @@
   font-family: oswald-regular;
 }
 
+/* Styling for body */
 body {
   background-color: rgb(41, 39, 39);
   color: white;
@@ -17,27 +18,32 @@ body {
   font-family: oswald-regular;
 }
 
+/* Styling for h1 */
 h1 {
   font-size: 50px;
   text-shadow: 3px 3px black;
   margin: 40px 0 0;
 }
 
+/* Styling for expense total label */
 .total {
   font-size: 40px;
   text-shadow: 3px 3px black;
   margin: 20px 0 20px;
 }
 
+/* Styling for expense total */
 #expense-total {
   color: rgb(26, 199, 26);
 }
 
+/* Styling for input labels */
 .input-forms {
   font-size: 25px;
   text-shadow: 3px 3px black;
 }
 
+/* Styling for input forms */
 .expense-input {
   background-color: rgb(224, 222, 222);
   width: 180px;
@@ -53,10 +59,12 @@ h1 {
   border-radius: 8px;
 }
 
+/* Removes inc/dec buttons on number input form */
 input[type=number]{
   -moz-appearance: textfield;
 }
 
+/* Styling for submit button */
 #submit {
   background-color: rgb(63, 109, 201);
   color: white;
@@ -74,11 +82,13 @@ input[type=number]{
   background-color: rgb(49, 91, 176);
 }
 
+/* Styling for sort menu div */
 .sort {
   margin-top: 5px;
   font-size: 25px;
 }
 
+/* Styling for sort menu */
 .sort select {
   width: 180px;
   height: 35px;
@@ -89,12 +99,14 @@ input[type=number]{
   font-family: oswald-regular;
 }
 
+/* Styling for table */
 table {
   margin-top: 20px;
   width: 100%;
   font-size: 20px;
 }
 
+/* Styling for table row */
 tr {
   font-size: 23px;
 }
@@ -103,21 +115,25 @@ tr:nth-child(even) {
   background-color: #473f3f;
 }
 
+/* Styling for table header */
 th {
   font-size: 26px;
   text-shadow: 3px 3px black;
 }
 
+/* Styling for table data and header */
 td, th {
   text-align: left;
   padding: 8px;
 }
 
+/* Styling for table elements */
 td, th, tr, table {
   border: 0; 
   border-spacing: 0;
 }
 
+/* Styling for edit and delete buttons */
 .entryBtn {
   background-color:rgb(59, 55, 55);
   color: white;
@@ -134,7 +150,7 @@ td, th, tr, table {
   color: rgb(59, 55, 55);
 }
 
-
+/* Style for date input forms for edited entries */
 .edited{
   width: 95px;
   height: 30px;
