@@ -22,14 +22,14 @@ body {
 h1 {
   font-size: 50px;
   text-shadow: 3px 3px black;
-  margin: 40px 0 0;
+  margin: 30px 0 0;
 }
 
 /* Styling for expense total label */
 .total {
   font-size: 40px;
   text-shadow: 3px 3px black;
-  margin: 20px 0 20px;
+  margin: 10px 0px;
 }
 
 /* Styling for expense total */
@@ -103,7 +103,6 @@ input[type=number]{
 table {
   margin-top: 20px;
   width: 100%;
-  font-size: 20px;
 }
 
 /* Styling for table row */
@@ -155,4 +154,121 @@ td, th, tr, table {
   width: 95px;
   height: 30px;
   font-size: 10px;
+}
+
+/* Styling for different widths */
+@media only screen and (min-width: 800px) {
+  /* Styling for h1 */
+  h1 {
+    font-size: 70px;
+    margin: 20px 0 0;
+  }
+
+  /* Styling for expense total label */
+  .total {
+    font-size: 60px;
+    margin: 0px 0;
+  }
+
+  /* Styling for input forms */
+  .input-forms {
+    font-size: 35px;
+  }
+
+  .expense-input {
+    top: -5px;
+  }
+
+  /* Styling for submit button */
+  #submit {
+    width: 235px;
+    height: 50px;
+    margin: 5px 0;
+    font-size: 30px;
+  }
+
+  /* Styling for sort menu */
+  .sort {
+    margin-top: 5px;
+    font-size: 35px;
+  }
+
+  .sort select {
+    width: 200px;
+    height: 45px;
+    top: -2px;
+    font-size: 25px;
+  }
+  
+  /* Wraps table to max size of 650px */
+  .tableWrapper {
+    margin: 0 auto;
+    width: 650px;
+  }
+
+  /* Styling for table row */
+  tr {
+    font-size: 31px;
+  }
+
+  /* Styling for table header */
+  th {
+    font-size: 34px;
+  }
+
+  /* Styling for edit and delete buttons */
+  .entryBtn {
+    width: 50px;
+    height: 35px;
+    font-size: 18px;
+    position: relative;
+    top: -6px;
+  }
+
+  /* Style for date input forms for edited entries */
+  .edited{
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    position: relative;
+    top: -6px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  /* Styling for input forms */
+  .input-forms {
+    margin: 30px 0px 20px;
+  }
+
+  .input-child {
+    display: inline-block;
+  }
+
+  /* Styling for input forms */
+  .expense-input {
+    height: 25px;
+    font-size: 24px;
+  }
+
+  /* Styling for submit button */
+  #submit {
+    width: 300px;
+    height: 60px;
+    font-size: 40px;
+    margin-bottom: 25px;
+  }
+
+  /* Wraps table to max size of 900px */
+  .tableWrapper {
+    width: 900px;
+  }
+
+  .entryBtn {
+    width: 80px;
+    height: 35px;
+    font-size: 21px;
+    position: relative;
+    top: -6px;
+  }
 }

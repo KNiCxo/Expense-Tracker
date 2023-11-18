@@ -19,12 +19,18 @@
 
   <!-- Expense Input Forms -->
   <div class="input-forms">
-    <label for="expense-name">Expense: </label>
-    <input id="expense-name" class="expense-input" type="text"> <br>
-    <label for="expense-cost" >Cost ($): </label>
-    <input id="expense-cost" class="expense-input" type="number"> <br>
-    <label for="expense-date">Date: </label>
-    <input id="expense-date" class="expense-input" type="date"> <br>
+    <div class="input-child">
+      <label for="expense-name">Expense: </label>
+      <input id="expense-name" class="expense-input" type="text">
+    </div>
+    <div class="input-child">
+      <label for="expense-cost" >Cost ($): </label>
+      <input id="expense-cost" class="expense-input" type="number">
+    </div>
+    <div class="input-child">
+      <label for="expense-date">Date: </label>
+      <input id="expense-date" class="expense-input" type="date">
+    </div>
   </div>
 
   <button id="submit">Submit</button> <br>
@@ -40,13 +46,15 @@
   </div>
 
   <!-- Expense Table -->
-  <table id="entryTable">
-    <tr>
-      <th>Expense</th>
-      <th>Cost</th>
-      <th>Date</th>
-    </tr>
-  </table> 
+  <div class="tableWrapper">
+    <table id="entryTable">
+      <tr>
+        <th>Expense</th>
+        <th>Cost</th>
+        <th>Date</th>
+      </tr>
+    </table> 
+  </div>
 
   <script type="module" src="expenseTracker.js"></script>
 </body>
