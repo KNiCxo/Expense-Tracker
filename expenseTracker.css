@@ -103,6 +103,7 @@ input[type=number]{
 table {
   margin-top: 20px;
   width: 100%;
+  table-layout: fixed;
 }
 
 /* Styling for table row */
@@ -116,7 +117,7 @@ tr:nth-child(even) {
 
 /* Styling for table header */
 th {
-  font-size: 26px;
+  font-size: 22px;
   text-shadow: 3px 3px black;
 }
 
@@ -124,6 +125,7 @@ th {
 td, th {
   text-align: left;
   padding: 8px;
+  word-wrap: break-word;
 }
 
 /* Styling for table elements */
@@ -214,6 +216,11 @@ td, th, tr, table {
   /* Styling for table header */
   th {
     font-size: 34px;
+  }
+  
+  /* Styling for table data and header */
+  td, th {
+    text-align: center;
   }
 
   /* Styling for edit and delete buttons */

@@ -39,8 +39,6 @@ expenseNameInput.value = '';
 expenseCostInput.value = '';
 expenseDateInput.value = '';
 sortTable();
-// *** TEMPORARY CODE: DELETE LATER *** \\
-expenseArray.forEach((index) => console.log(index));
 
 // Expense is added to table and total is calculated when Submit Button is clicked
 submitBtn.addEventListener('click', addExpense);
@@ -85,9 +83,6 @@ function addExpense() {
   calculateTotal(cost);
   clearTable();
   drawTable();
-
-  // *** TEMPORARY CODE: DELETE LATER *** \\
-  expenseArray.forEach((index) => console.log(index));
 
   // Clears input forms
   expenseNameInput.value = '';
